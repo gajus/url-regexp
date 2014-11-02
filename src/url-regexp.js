@@ -1,5 +1,7 @@
 var URLRegExp = {},
-    URLRegEx;
+    URLRegEx,
+    one,
+    many;
 
 /**
  * @author https://gist.github.com/dperini/729294
@@ -36,12 +38,23 @@ URLRegEx =
     // resource path
     '(?:/\\S*)?';
 
-URLRegExp.one = function () {
-    return new RegExp('^' + URLRegEx +'$', 'i');
+one = new RegExp('^' + URLRegEx +'$', 'i');
+many = new RegExp(URLRegEx, 'ig');
+
+URLRegExp.validate = function (inputString) {
+    return one.test(inputString);
 };
 
-URLRegExp.many = function () {
-    return new RegExp(URLRegEx, 'ig');
-};
+URLRegExp.match = function (inputString) {
+    var matches = inputString.match(many);
+
+    if (!matches) {
+        return [];
+    }
+
+    return matches.filter(function (value, index) {
+        return matches.indexOf(value) === index;
+    });
+}
 
 module.exports = URLRegExp;

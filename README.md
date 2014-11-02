@@ -14,13 +14,15 @@ var URLRegExp = require('url-regexp');
 ## Validate URL
 
 ```js
-URLRegExp.one.test('input string');
+URLRegExp.validate('input string');
 ```
 
 ## Match URLs
 
+`URLRegExp.match()` will return all valid URLs from the string.
+
 ```js
-'input string'.match(URLRegExp.many());
+URLRegExp.match('input string');
 ```
 
 ## Download

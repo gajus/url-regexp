@@ -88,25 +88,28 @@ describe('URLRegExp', function () {
     beforeEach(function () {
         URLRegexp = require('../src/url-regexp.js');
     });
-    describe('.one()', function () {
+    describe('.validate()', function () {
         expectedToMatch.forEach(function (url) {
-            it('matches ' + url, function () {
-                expect(URLRegexp.one().test(url)).to.be.true;
+            it('passes ' + url, function () {
+                expect(URLRegexp.validate(url)).to.be.true;
             });
         });
 
         expectedToNotMatch.forEach(function (url) {
-            it('does not match ' + url, function () {
-                expect(URLRegexp.one().test(url)).to.be.false;
+            it('fails ' + url, function () {
+                expect(URLRegexp.validate(url)).to.be.false;
             });
         });
     });
-    describe('.many()', function () {
+    describe('.match()', function () {
         it('matches', function () {
-            expect(expectedToMatch.join(' ').match(URLRegexp.many())).to.be.deep.equal(expectedToMatch);
+            expect(URLRegexp.match(expectedToMatch.join(' '))).to.be.deep.equal(expectedToMatch);
         });
         //it('does not match', function () {
         //    expect(expectedToNotMatch.join(' ').match(URLRegexp.many())).to.be.deep.equal([]);
         //});
+        it('matches unique URLs', function () {
+            expect(URLRegexp.match('http://foo.com http://foo.com http://bar.com')).to.be.deep.equal(['http://foo.com', 'http://bar.com']);
+        });
     });
 });

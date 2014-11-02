@@ -1,6 +1,6 @@
 {
   "name": "url-regexp",
-  "description": "RegExp object to match URL(s).",
+  "description": "RegExp object to match and validate URL(s).",
   "keywords": [
     "regex",
     "url"

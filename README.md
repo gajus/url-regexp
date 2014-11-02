@@ -1,7 +1,9 @@
 ## URL RegExp
 
-[![Build Status](https://travis-ci.org/gajus/deadlink.png?branch=master)](https://travis-ci.org/gajus/deadlink)
-[![NPM version](https://badge.fury.io/js/deadlink.svg?cache1)](http://badge.fury.io/js/deadlink)
+[![Build Status](https://travis-ci.org/gajus/url-regexp.png?branch=master)](https://travis-ci.org/gajus/url-regexp)
+[![NPM version](https://badge.fury.io/js/url-regexp.svg?cache1)](http://badge.fury.io/js/url-regexp)
+
+RegExp object to match and validate URL(s).
 
 ## Usage
 

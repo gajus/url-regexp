@@ -37,8 +37,8 @@ expectedToMatch = [
     'http://उदाहरण.परीक्षा',
     'http://-.~_!$&\'()*+,;=:%40:80%2f::::::@example.com',
     'http://1337.net',
-    'http://a.b-c.de'
-    //'http://223.255.255.254'
+    'http://a.b-c.de',
+    'http://223.255.255.254'
 ];
 
 expectedToNotMatch = [
@@ -66,7 +66,7 @@ expectedToNotMatch = [
     'http://foo.bar/foo(bar)baz quux',
     'ftps://foo.bar/',
     'http://-error-.invalid/',
-    //'http://a.b--c.de/',
+    'http://a.b--c.de/',
     'http://-a.b.co',
     'http://a.b-.co',
     'http://0.0.0.0',
@@ -84,32 +84,32 @@ expectedToNotMatch = [
 ];
 
 describe('URLRegExp', function () {
-    var URLRegexp;
+    var URLRegExp;
     beforeEach(function () {
-        URLRegexp = require('../src/url-regexp.js');
+        URLRegExp = require('../src/url-regexp.js');
     });
     describe('.validate()', function () {
         expectedToMatch.forEach(function (url) {
             it('passes ' + url, function () {
-                expect(URLRegexp.validate(url)).to.be.true;
+                expect(URLRegExp.validate(url)).to.be.true;
             });
         });
 
         expectedToNotMatch.forEach(function (url) {
             it('fails ' + url, function () {
-                expect(URLRegexp.validate(url)).to.be.false;
+                expect(URLRegExp.validate(url)).to.be.false;
             });
         });
     });
     describe('.match()', function () {
         it('matches', function () {
-            expect(URLRegexp.match(expectedToMatch.join(' '))).to.be.deep.equal(expectedToMatch);
+            expect(URLRegExp.match(expectedToMatch.join(' '))).to.be.deep.equal(expectedToMatch);
         });
-        //it('does not match', function () {
-        //    expect(expectedToNotMatch.join(' ').match(URLRegexp.many())).to.be.deep.equal([]);
-        //});
+        xit('does not match', function () {
+            expect(URLRegExp.match(expectedToNotMatch.join(' '))).to.be.deep.equal([]);
+        });
         it('matches unique URLs', function () {
-            expect(URLRegexp.match('http://foo.com http://foo.com http://bar.com')).to.be.deep.equal(['http://foo.com', 'http://bar.com']);
+            expect(URLRegExp.match('http://foo.com http://foo.com http://bar.com')).to.be.deep.equal(['http://foo.com', 'http://bar.com']);
         });
     });
 });

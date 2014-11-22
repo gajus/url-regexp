@@ -38,7 +38,8 @@ expectedToMatch = [
     'http://-.~_!$&\'()*+,;=:%40:80%2f::::::@example.com',
     'http://1337.net',
     'http://a.b-c.de',
-    'http://223.255.255.254'
+    'http://223.255.255.254',
+    'http://a.b--c.de/'
 ];
 
 expectedToNotMatch = [
@@ -66,7 +67,6 @@ expectedToNotMatch = [
     'http://foo.bar/foo(bar)baz quux',
     'ftps://foo.bar/',
     'http://-error-.invalid/',
-    'http://a.b--c.de/',
     'http://-a.b.co',
     'http://a.b-.co',
     'http://0.0.0.0',

@@ -1,23 +1,23 @@
-## URL RegExp
+<h2 id="url-regexp">URL RegExp</h2>
 
-[![Build Status](https://travis-ci.org/gajus/url-regexp.png?branch=master)](https://travis-ci.org/gajus/url-regexp)
-[![NPM version](https://badge.fury.io/js/url-regexp.svg?cache1)](http://badge.fury.io/js/url-regexp)
+[![Travis build status](http://img.shields.io/travis/gajus/url-regexp/master.svg?style=flat)](https://travis-ci.org/gajus/url-regexp)
+[![NPM version](http://img.shields.io/npm/v/url-regexp.svg?style=flat)](https://www.npmjs.org/package/url-regexp)
 
 RegExp object to match and validate URL(s).
 
-## Usage
+<h2 id="usage">Usage</h2>
 
 ```js
 var URLRegExp = require('url-regexp');
 ```
 
-## Validate URL
+<h2 id="validate-url">Validate URL</h2>
 
 ```js
 URLRegExp.validate('input string');
 ```
 
-## Match URLs
+<h2 id="match-urls">Match URLs</h2>
 
 `URLRegExp.match()` will return all valid URLs from the string.
 
@@ -25,10 +25,10 @@ URLRegExp.validate('input string');
 URLRegExp.match('input string');
 ```
 
-## Download
+<h2 id="download">Download</h2>
 
 Download using [NPM](https://www.npmjs.org/):
 
 ```sh
-npm install url-regexp --save
+npm install url-regexp
 ```

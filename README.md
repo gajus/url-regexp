@@ -11,13 +11,13 @@ RegExp object to match and validate URL(s).
 var URLRegExp = require('url-regexp');
 ```
 
-<h2 id="validate-url">Validate URL</h2>
+<h3 id="usage-validate-url">Validate URL</h3>
 
 ```js
 URLRegExp.validate('input string');
 ```
 
-<h2 id="match-urls">Match URLs</h2>
+<h3 id="usage-match-urls">Match URLs</h3>
 
 `URLRegExp.match()` will return all valid URLs from the string.
 

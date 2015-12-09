@@ -13,7 +13,7 @@
     "url": "https://github.com/gajus/url-regexp"
   },
   "license": "BSD-3-Clause",
-  "scrips": {
+  "scripts": {
     "test": "gulp test"
   },
   "devDependencies": {
@@ -23,6 +23,7 @@
     "gulp-jshint": "^1.8.6",
     "gulp-mocha": "^1.1.1",
     "jshint": "^2.5.8",
+    "jshint-stylish": "^2.1.0",
     "mocha": "^2.0.1"
   },
   "dependencies": {}

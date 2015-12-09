@@ -34,11 +34,11 @@ URLRegEx =
         // (first & last IP address of each class)
 
         // filter 1. part for 1-223
-        '(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])' +
+        '(?:22[0-3]|2[01]\\d|[1-9]\\d?|1\\d\\d)' +
         // filter 2. and 3. part for 0-255
-        '(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}' +
+        '(?:\\.(?:25[0-5]|2[0-4]\\d|1?\\d{1,2})){2}' +
         // filter 4. part for 1-254
-        '(?:\\.(?:25[0-4]|[1-9]\\d?|1\\d\\d|2[0-4]\\d))' +
+        '(?:\\.(?:25[0-4]|2[0-4]\\d|1\\d\\d|[1-9]\\d?))' +
     '|' +
         // host name
         '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)' +
@@ -68,9 +68,11 @@ URLRegExp.match = function (inputString) {
         return [];
     }
 
-    // remove url duplicates
-    return matches.filter(function (value, index) {
-        return matches.indexOf(value) === index;
+    // Remove url duplicates by a lookup taple
+    // Reference: http://stackoverflow.com/a/9229821/1378261
+    var seen = {};
+    return matches.filter(function (url) {
+        return seen.hasOwnProperty(url) ? false : (seen[url] = true);
     });
 };
 

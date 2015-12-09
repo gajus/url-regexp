@@ -13,7 +13,7 @@
     "url": "https://github.com/gajus/url-regexp"
   },
   "license": "BSD-3-Clause",
-  "scrips": {
+  "scripts": {
     "test": "gulp test"
   },
   "devDependencies": {

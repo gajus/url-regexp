@@ -55,6 +55,6 @@ URLRegExp.match = function (inputString) {
     return matches.filter(function (value, index) {
         return matches.indexOf(value) === index;
     });
-}
+};
 
 module.exports = URLRegExp;

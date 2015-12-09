@@ -1,7 +1,7 @@
 ## URL RegExp
 
-[![Travis build status](http://img.shields.io/travis/gajus/url-regexp/master.svg?style=flat)](https://travis-ci.org/gajus/url-regexp)
-[![NPM version](http://img.shields.io/npm/v/url-regexp.svg?style=flat)](https://www.npmjs.org/package/url-regexp)
+[![Travis build status](http://img.shields.io/travis/gajus/url-regexp/master.svg?style=flat-square)](https://travis-ci.org/gajus/url-regexp)
+[![NPM version](http://img.shields.io/npm/v/url-regexp.svg?style=flat-square)](https://www.npmjs.org/package/url-regexp)
 
 RegExp object to match and validate URL(s).
 

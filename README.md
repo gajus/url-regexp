@@ -8,7 +8,7 @@ RegExp object to match and validate URL(s).
 ## Usage
 
 ```js
-var URLRegExp = require('url-regexp');
+import URLRegExp from 'url-regexp';
 ```
 
 ### Validate URL
@@ -30,7 +30,9 @@ URLRegExp.match('input string');
 `URLRegExp.replace()` will replace all url instances depending on the passed replacment string or function identical as [`String.prototype.replace()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace).
 
 ```js
-var strWithUrls = 'John favorite website is http://twitter.com';
+let strWithUrls;
+
+strWithUrls = 'John favorite website is http://twitter.com';
 URLRegExp.replace(strWithUrls, 'twitter');
 // John favorite website is twitter
 ```

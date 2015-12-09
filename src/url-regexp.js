@@ -1,12 +1,11 @@
-/* jslint node: true */
-"use strict"; 
+let URLRegEx,
+    URLRegExp,
+    many,
+    one;
 
-var URLRegExp = {};
+URLRegExp = {};
 
-/**
- * @author https://gist.github.com/dperini/729294
- */
-var URLRegEx =
+URLRegEx =
     // protocol identifier
     '(?:(?:https?|ftp)://)' +
 
@@ -16,7 +15,7 @@ var URLRegEx =
     '(?:' +
         // IP address exclusion - private & local networks
         // Reference: https://www.arin.net/knowledge/address_filters.html
-        
+
         // filter 10.*.*.* and 127.*.*.* adresses
         '(?!(?:10|127)(?:\\.\\d{1,3}){3})' +
 
@@ -56,15 +55,18 @@ var URLRegEx =
     // resource path
     '(?:/\\S*)?';
 
-var one = new RegExp('^' + URLRegEx +'$', 'i');
-var many = new RegExp(URLRegEx, 'ig');
+one = new RegExp('^' + URLRegEx + '$', 'i');
+many = new RegExp(URLRegEx, 'ig');
 
-URLRegExp.validate = function (inputString) {
+URLRegExp.validate = (inputString) => {
     return one.test(inputString);
 };
 
-URLRegExp.match = function (inputString) {
-    var matches = inputString.match(many);
+URLRegExp.match = (inputString) => {
+    let matches,
+        seen;
+
+    matches = inputString.match(many);
 
     if (!matches) {
         return [];
@@ -72,14 +74,14 @@ URLRegExp.match = function (inputString) {
 
     // Remove url duplicates by a lookup taple
     // Reference: http://stackoverflow.com/a/9229821/1378261
-    var seen = {};
-    return matches.filter(function (url) {
-        return seen.hasOwnProperty(url) ? false : (seen[url] = true);
+    seen = {};
+    return matches.filter((url) => {
+        return seen.hasOwnProperty(url) ? false : seen[url] = true;
     });
 };
 
-URLRegExp.replace = function (inputString, replacment) {
+URLRegExp.replace = (inputString, replacment) => {
     return inputString.replace(many, replacment);
 };
 
-module.exports = URLRegExp;
+export default URLRegExp;

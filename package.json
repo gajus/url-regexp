@@ -6,24 +6,32 @@
     "url"
   ],
   "version": "1.1.0",
-  "main": "src/url-regexp.js",
-  "author": "Gajus Kuizinas <gk@anuary.com>",
+  "main": "./dist/url-regexp.js",
+  "author": {
+    "name": "Gajus Kuizinas",
+    "email": "gk@anuary.com",
+    "url": "http://gajus.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gajus/url-regexp"
   },
   "license": "BSD-3-Clause",
   "scripts": {
-    "test": "gulp test"
+    "pragmatist": "node ./node_modules/.bin/pragmatist",
+    "lint": "npm run pragmatist lint",
+    "test": "npm run pragmatist test",
+    "build": "npm run pragmatist build",
+    "watch": "npm run pragmatist watch",
+    "watch-lint": "npm run pragmatist watch-lint",
+    "watch-test": "npm run pragmatist watch-test",
+    "watch-build": "npm run pragmatist watch-build"
   },
   "devDependencies": {
-    "chai": "^1.9.2",
-    "gulp": "^3.8.9",
-    "gulp-jshint": "^1.8.6",
-    "gulp-mocha": "^1.1.1",
-    "jshint": "^2.5.8",
-    "jshint-stylish": "^2.1.0",
-    "mocha": "^2.0.1"
+    "chai": "^1.10.0",
+    "lodash": "^3.10.1",
+    "mocha": "^2.0.1",
+    "pragmatist": "^1.9.7"
   },
   "dependencies": {}
 }

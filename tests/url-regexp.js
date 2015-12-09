@@ -1,6 +1,13 @@
-var expect = require('chai').expect;
+/* eslint-disable max-nested-callbacks */
 
-var expectedToMatch = [
+import {
+    expect
+} from 'chai';
+
+let expectedToMatch,
+    expectedToNotMatch;
+
+expectedToMatch = [
     'http://foo.com/blah_blah',
     'http://foo.com/blah_blah/',
     'http://foo.com/blah_blah_(wikipedia)',
@@ -76,10 +83,10 @@ var expectedToMatch = [
     'http://223.255.125.254',
     'http://223.255.255.1',
     'http://223.255.255.125',
-    'http://223.255.255.254',
+    'http://223.255.255.254'
 ];
 
-var expectedToNotMatch = [
+expectedToNotMatch = [
     'http://',
     'http://.',
     'http://..',
@@ -173,74 +180,90 @@ var expectedToNotMatch = [
     'http://3628126748',
     'http://.www.foo.bar/',
     'http://www.foo.bar./',
-    'http://.www.foo.bar./',
+    'http://.www.foo.bar./'
 ];
 
-describe('URLRegExp', function () {
-    var URLRegExp;
+describe('URLRegExp', () => {
+    let URLRegExp;
 
-    beforeEach(function () {
-        URLRegExp = require('../src/url-regexp.js');
+    beforeEach(() => {
+        /* eslint-disable global-require, import/no-require */
+        URLRegExp = require('../src/url-regexp.js').default;
+        /* eslint-enable global-require, import/no-require */
     });
 
-    describe('.validate()', function () {
-        expectedToMatch.forEach(function (url) {
-            it('passes ' + url, function () {
-                expect(URLRegExp.validate(url)).to.be.true;
+    describe('.validate()', () => {
+        expectedToMatch.forEach((url) => {
+            it('passes ' + url, () => {
+                expect(URLRegExp.validate(url)).to.equal(true);
             });
         });
 
-        expectedToNotMatch.forEach(function (url) {
-            it('fails ' + url, function () {
-                expect(URLRegExp.validate(url)).to.be.false;
+        expectedToNotMatch.forEach((url) => {
+            it('fails ' + url, () => {
+                expect(URLRegExp.validate(url)).to.equal(false);
             });
-        });
-    });
-
-    describe('.match()', function () {
-        it('matches', function () {
-            expect(URLRegExp.match(expectedToMatch.join(' '))).to.be.deep.equal(expectedToMatch);
-        });
-        it('does not match', function () {
-            expect(URLRegExp.match(expectedToNotMatch.join(' '))).to.be.deep.equal([]);
-        });
-        it('matches unique URLs', function () {
-            expect(URLRegExp.match('http://foo.com http://foo.com http://bar.com')).to.be.deep.equal(['http://foo.com', 'http://bar.com']);
         });
     });
 
-    describe('.replace()', function () {
-        var replaceWith = 'new-value';
+    describe('.match()', () => {
+        it('matches', () => {
+            expect(URLRegExp.match(expectedToMatch.join(' '))).to.deep.equal(expectedToMatch);
+        });
+        it('does not match', () => {
+            expect(URLRegExp.match(expectedToNotMatch.join(' '))).to.deep.equal([]);
+        });
+        it('matches unique URLs', () => {
+            expect(URLRegExp.match('http://foo.com http://foo.com http://bar.com')).to.deep.equal(['http://foo.com', 'http://bar.com']);
+        });
+    });
 
-        expectedToMatch.forEach(function (url) {
-            it('replaces ' + url, function () {
-                var expectValue = URLRegExp.replace(url, replaceWith);
-                expect(expectValue).to.be.equal(replaceWith);
+    describe('.replace()', () => {
+        let replaceWith;
+
+        replaceWith = 'new-value';
+
+        expectedToMatch.forEach((url) => {
+            it('replaces ' + url, () => {
+                let expectedValue;
+
+                expectedValue = URLRegExp.replace(url, replaceWith);
+                expect(expectedValue).to.equal(replaceWith);
             });
         });
 
-        it('replaces multiple urls at once', function () {
-            var expectValue = '';
-            expectedToMatch.forEach(function(url) {
-                expectValue += replaceWith + ' ';
-            });
-            expectValue = expectValue.trim();
-            var actualValue = URLRegExp.replace(expectedToMatch.join(' '), replaceWith);
+        it('replaces multiple urls at once', () => {
+            let actualValue,
+                expectedValue;
 
-            expect(actualValue).to.be.equal(expectValue);
+            expectedValue = '';
+            expectedToMatch.forEach(() => {
+                expectedValue += replaceWith + ' ';
+            });
+            expectedValue = expectedValue.trim();
+
+            actualValue = URLRegExp.replace(expectedToMatch.join(' '), replaceWith);
+
+            expect(actualValue).to.equal(expectedValue);
         });
 
-        expectedToNotMatch.forEach(function (url) {
-            it('fails ' + url, function () {
-                var expectValue = URLRegExp.replace(url, replaceWith);
-                expect(expectValue).to.be.equal(url);
+        expectedToNotMatch.forEach((url) => {
+            it('fails ' + url, () => {
+                let expectedValue;
+
+                expectedValue = URLRegExp.replace(url, replaceWith);
+                expect(expectedValue).to.equal(url);
             });
         });
 
-        it('does not replace multiple urls at once', function () {
-            var expectValue = expectedToNotMatch.join(' ');
-            var actualValue = URLRegExp.replace(expectValue, replaceWith);
-            expect(actualValue).to.be.equal(expectValue);
+        it('does not replace multiple urls at once', () => {
+            let actualValue,
+                expectedValue;
+
+            expectedValue = expectedToNotMatch.join(' ');
+            actualValue = URLRegExp.replace(expectedValue, replaceWith);
+
+            expect(actualValue).to.equal(expectedValue);
         });
     });
 });

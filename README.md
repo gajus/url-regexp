@@ -1,23 +1,23 @@
-<h2 id="url-regexp">URL RegExp</h2>
+## URL RegExp
 
-[![Travis build status](http://img.shields.io/travis/renarsvilnis/url-regexp/master.svg?style=flat)](https://travis-ci.org/renarsvilnis/url-regexp)
+[![Travis build status](http://img.shields.io/travis/gajus/url-regexp/master.svg?style=flat)](https://travis-ci.org/gajus/url-regexp)
 [![NPM version](http://img.shields.io/npm/v/url-regexp.svg?style=flat)](https://www.npmjs.org/package/url-regexp)
 
 RegExp object to match and validate URL(s).
 
-<h2 id="usage">Usage</h2>
+## Usage
 
 ```js
 var URLRegExp = require('url-regexp');
 ```
 
-<h3 id="usage-validate-url">Validate URL</h3>
+### Validate URL
 
 ```js
 URLRegExp.validate('input string');
 ```
 
-<h3 id="usage-match-urls">Match URLs</h3>
+### Match URLs
 
 `URLRegExp.match()` will return all valid URLs from the string.
 
@@ -25,7 +25,7 @@ URLRegExp.validate('input string');
 URLRegExp.match('input string');
 ```
 
-<h3 id="usage-replace-urls">Replace URLs</h3>
+### Replace URLs
 
 `URLRegExp.replace()` will replace all url instances depending on the passed replacment string or function identical as [`String.prototype.replace()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace).
 
@@ -35,7 +35,7 @@ URLRegExp.replace(strWithUrls, 'twitter');
 // John favorite website is twitter
 ```
 
-<h2 id="download">Download</h2>
+## Download
 
 Download using [NPM](https://www.npmjs.org/):
 

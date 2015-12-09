@@ -78,4 +78,8 @@ URLRegExp.match = function (inputString) {
     });
 };
 
+URLRegExp.replace = function (inputString, replacment) {
+    return inputString.replace(many, replacment);
+};
+
 module.exports = URLRegExp;

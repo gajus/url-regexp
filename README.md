@@ -1,6 +1,6 @@
 <h2 id="url-regexp">URL RegExp</h2>
 
-[![Travis build status](http://img.shields.io/travis/gajus/url-regexp/master.svg?style=flat)](https://travis-ci.org/gajus/url-regexp)
+[![Travis build status](http://img.shields.io/travis/renarsvilnis/url-regexp/master.svg?style=flat)](https://travis-ci.org/renarsvilnis/url-regexp)
 [![NPM version](http://img.shields.io/npm/v/url-regexp.svg?style=flat)](https://www.npmjs.org/package/url-regexp)
 
 RegExp object to match and validate URL(s).
@@ -25,10 +25,20 @@ URLRegExp.validate('input string');
 URLRegExp.match('input string');
 ```
 
+<h3 id="usage-replace-urls">Replace URLs</h3>
+
+`URLRegExp.replace()` will replace all url instances depending on the passed replacment string or function identical as [`String.prototype.replace()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace).
+
+```js
+var strWithUrls = 'John favorite website is http://twitter.com';
+URLRegExp.replace(strWithUrls, 'twitter');
+// John favorite website is twitter
+```
+
 <h2 id="download">Download</h2>
 
 Download using [NPM](https://www.npmjs.org/):
 
 ```sh
-npm install url-regexp
+npm install --save url-regexp
 ```

@@ -1,8 +1,6 @@
-var expect = require('chai').expect,
-    expectedToMatch,
-    expectedToNotMatch;
+var expect = require('chai').expect;
 
-expectedToMatch = [
+var expectedToMatch = [
     'http://foo.com/blah_blah',
     'http://foo.com/blah_blah/',
     'http://foo.com/blah_blah_(wikipedia)',
@@ -40,78 +38,48 @@ expectedToMatch = [
     'http://a.b-c.de',
     'http://a.b--c.de/',
 
-    // 'http://5.0.0.0',
     'http://5.0.0.1',
     'http://5.0.0.254',
-    // 'http://5.0.0.255',
-    // 'http://5.0.125.0',
     'http://5.0.125.1',
     'http://5.0.125.254',
-    // 'http://5.0.125.255',
-    // 'http://5.0.255.0',
     'http://5.0.255.1',
     'http://5.0.255.125',
     'http://5.0.255.254',
-    // 'http://5.0.255.255',
 
-    // 'http://25.0.0.0',
     'http://25.0.0.1',
     'http://25.0.0.254',
-    // 'http://25.0.0.255',
-    // 'http://25.0.125.0',
     'http://25.0.125.1',
     'http://25.0.125.254',
-    // 'http://25.0.125.255',
-    // 'http://25.0.255.0',
     'http://25.0.255.1',
     'http://25.0.255.125',
     'http://25.0.255.254',
-    // 'http://25.0.255.255',
 
-    // 'http://223.0.0.0',
     'http://223.0.0.1',
     'http://223.0.0.254',
-    // 'http://223.0.0.255',
-    // 'http://223.0.125.0',
     'http://223.0.125.1',
     'http://223.0.125.254',
-    // 'http://223.0.125.255',
-    // 'http://223.0.255.0',
     'http://223.0.255.1',
     'http://223.0.255.125',
     'http://223.0.255.254',
-    // 'http://223.0.255.255',
 
-    // 'http://223.125.0.0',
     'http://223.125.0.1',
     'http://223.125.0.254',
-    // 'http://223.125.0.255',
-    // 'http://223.125.125.0',
     'http://223.125.125.1',
     'http://223.125.125.254',
-    // 'http://223.125.125.255',
-    // 'http://223.125.255.0',
     'http://223.125.255.1',
     'http://223.125.255.125',
     'http://223.125.255.254',
-    // 'http://223.125.255.255',
 
-    // 'http://223.255.0.0',
     'http://223.255.0.1',
     'http://223.255.0.254',
-    // 'http://223.255.0.255',
-    // 'http://223.255.125.0',
     'http://223.255.125.1',
     'http://223.255.125.254',
-    // 'http://223.255.125.255',
-    // 'http://223.255.255.0',
     'http://223.255.255.1',
     'http://223.255.255.125',
     'http://223.255.255.254',
-    // 'http://223.255.255.255'
 ];
 
-expectedToNotMatch = [
+var expectedToNotMatch = [
     'http://',
     'http://.',
     'http://..',
@@ -210,9 +178,11 @@ expectedToNotMatch = [
 
 describe('URLRegExp', function () {
     var URLRegExp;
+
     beforeEach(function () {
         URLRegExp = require('../src/url-regexp.js');
     });
+
     describe('.validate()', function () {
         expectedToMatch.forEach(function (url) {
             it('passes ' + url, function () {
@@ -226,6 +196,7 @@ describe('URLRegExp', function () {
             });
         });
     });
+
     describe('.match()', function () {
         it('matches', function () {
             expect(URLRegExp.match(expectedToMatch.join(' '))).to.be.deep.equal(expectedToMatch);
@@ -235,6 +206,41 @@ describe('URLRegExp', function () {
         });
         it('matches unique URLs', function () {
             expect(URLRegExp.match('http://foo.com http://foo.com http://bar.com')).to.be.deep.equal(['http://foo.com', 'http://bar.com']);
+        });
+    });
+
+    describe('.replace()', function () {
+        var replaceWith = 'new-value';
+
+        expectedToMatch.forEach(function (url) {
+            it('replaces ' + url, function () {
+                var expectValue = URLRegExp.replace(url, replaceWith);
+                expect(expectValue).to.be.equal(replaceWith);
+            });
+        });
+
+        it('replaces multiple urls at once', function () {
+            var expectValue = '';
+            expectedToMatch.forEach(function(url) {
+                expectValue += replaceWith + ' ';
+            });
+            expectValue = expectValue.trim();
+            var actualValue = URLRegExp.replace(expectedToMatch.join(' '), replaceWith);
+
+            expect(actualValue).to.be.equal(expectValue);
+        });
+
+        expectedToNotMatch.forEach(function (url) {
+            it('fails ' + url, function () {
+                var expectValue = URLRegExp.replace(url, replaceWith);
+                expect(expectValue).to.be.equal(url);
+            });
+        });
+
+        it('does not replace multiple urls at once', function () {
+            var expectValue = expectedToNotMatch.join(' ');
+            var actualValue = URLRegExp.replace(expectValue, replaceWith);
+            expect(actualValue).to.be.equal(expectValue);
         });
     });
 });

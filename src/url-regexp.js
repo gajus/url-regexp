@@ -1,12 +1,12 @@
-var URLRegExp = {},
-    URLRegEx,
-    one,
-    many;
+/* jslint node: true */
+"use strict"; 
+
+var URLRegExp = {};
 
 /**
  * @author https://gist.github.com/dperini/729294
  */
-URLRegEx =
+var URLRegEx =
     // protocol identifier
     '(?:(?:https?|ftp)://)' +
 
@@ -49,13 +49,15 @@ URLRegEx =
         // TLD identifier
         '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))' +
     ')' +
+
     // port number
     '(?::\\d{2,5})?' +
+
     // resource path
     '(?:/\\S*)?';
 
-one = new RegExp('^' + URLRegEx +'$', 'i');
-many = new RegExp(URLRegEx, 'ig');
+var one = new RegExp('^' + URLRegEx +'$', 'i');
+var many = new RegExp(URLRegEx, 'ig');
 
 URLRegExp.validate = function (inputString) {
     return one.test(inputString);
@@ -74,6 +76,10 @@ URLRegExp.match = function (inputString) {
     return matches.filter(function (url) {
         return seen.hasOwnProperty(url) ? false : (seen[url] = true);
     });
+};
+
+URLRegExp.replace = function (inputString, replacment) {
+    return inputString.replace(many, replacment);
 };
 
 module.exports = URLRegExp;

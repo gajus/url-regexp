@@ -33,5 +33,7 @@
     "mocha": "^2.0.1",
     "pragmatist": "^1.9.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "re2": "^1.15.4"
+  }
 }

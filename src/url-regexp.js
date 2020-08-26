@@ -1,7 +1,8 @@
 let URLRegEx,
     URLRegExp,
     many,
-    one;
+    one,
+    RE2 = require('re2');
 
 URLRegExp = {};
 
@@ -55,8 +56,8 @@ URLRegEx =
     // resource path
     '(?:/\\S*)?';
 
-one = new RegExp('^' + URLRegEx + '$', 'i');
-many = new RegExp(URLRegEx, 'ig');
+one = new RE2('^' + URLRegEx + '$', 'i');
+many = new RE2(URLRegEx, 'ig');
 
 URLRegExp.validate = (inputString) => {
     return one.test(inputString);
